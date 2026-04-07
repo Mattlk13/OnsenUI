@@ -152,6 +152,49 @@ class Platform {
   }
 
   /**
+   * @method getSafeAreaInsets
+   * @signature getSafeAreaInsets()
+   * @description
+   *   [en]Returns the safe area insets for the current device and orientation in pixels. Returns {top: 0, right: 0, bottom: 0, left: 0} if not applicable.[/en]
+   *   [ja]現在のデバイスと向きのセーフエリアのインセットをピクセル単位で返します。該当しない場合は {top: 0, right: 0, bottom: 0, left: 0} を返します。[/ja]
+   * @return {Object}
+   */
+  getSafeAreaInsets() {
+    if (!this.isIPhone()) {
+      return { top: 0, right: 0, bottom: 0, left: 0 };
+    }
+
+    const isPortrait = window.innerHeight > window.innerWidth;
+    let insets = { top: 0, right: 0, bottom: 0, left: 0 };
+
+    // Determine device based on screen size
+    const width = window.screen.width;
+    const height = window.screen.height;
+
+    if ((width === 375 && height === 812) || (width === 812 && height === 375)) { // X, XS, 11 Pro, 12 Mini, 13 Mini
+      insets = isPortrait ? { top: 44, right: 0, bottom: 34, left: 0 } : { top: 0, right: 44, bottom: 21, left: 44 };
+    } else if ((width === 414 && height === 896) || (width === 896 && height === 414)) { // XS Max, XR, 11, 11 Pro Max
+      insets = isPortrait ? { top: 44, right: 0, bottom: 34, left: 0 } : { top: 0, right: 44, bottom: 21, left: 44 };
+    } else if ((width === 390 && height === 844) || (width === 844 && height === 390)) { // 12, 12 Pro, 13, 13 Pro, 14
+      insets = isPortrait ? { top: 47, right: 0, bottom: 34, left: 0 } : { top: 0, right: 47, bottom: 21, left: 47 };
+    } else if ((width === 428 && height === 926) || (width === 926 && height === 428)) { // 12 Pro Max, 13 Pro Max, 14 Plus
+      insets = isPortrait ? { top: 47, right: 0, bottom: 34, left: 0 } : { top: 0, right: 47, bottom: 21, left: 47 };
+    } else if ((width === 393 && height === 852) || (width === 852 && height === 393)) { // 14 Pro, 15, 15 Pro, 16
+      insets = isPortrait ? { top: 59, right: 0, bottom: 34, left: 0 } : { top: 0, right: 59, bottom: 21, left: 59 };
+    } else if ((width === 430 && height === 932) || (width === 932 && height === 430)) { // 14 Pro Max, 15 Plus, 15 Pro Max, 16 Plus
+      insets = isPortrait ? { top: 59, right: 0, bottom: 34, left: 0 } : { top: 0, right: 59, bottom: 21, left: 59 };
+    } else if ((width === 402 && height === 874) || (width === 874 && height === 402)) { // 16 Pro, 17, 17 Pro
+      insets = isPortrait ? { top: 62, right: 0, bottom: 34, left: 0 } : { top: 0, right: 62, bottom: 21, left: 62 };
+    } else if ((width === 440 && height === 956) || (width === 956 && height === 440)) { // 16 Pro Max, 17 Pro Max
+      insets = isPortrait ? { top: 62, right: 0, bottom: 34, left: 0 } : { top: 0, right: 62, bottom: 21, left: 62 };
+    } else if ((width === 420 && height === 912) || (width === 912 && height === 420)) { // Air
+      insets = isPortrait ? { top: 59, right: 0, bottom: 34, left: 0 } : { top: 0, right: 59, bottom: 21, left: 59 };
+    }
+
+    return insets;
+  }
+
+  /**
    * @method isIPad
    * @signature isIPad()
    * @description
