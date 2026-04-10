@@ -10,22 +10,22 @@
   --iphonex-safe-area-inset-left-landscape: 44px;
 }
 
-@media (orientation: portrait) {
-  :root {
-    /* env() returns the exact value with fallback */
-    --iphonex-safe-area-inset-top-portrait: env(safe-area-inset-top, 44px);
-    --iphonex-safe-area-inset-right-portrait: env(safe-area-inset-right, 0px);
-    --iphonex-safe-area-inset-bottom-portrait: env(safe-area-inset-bottom, 34px);
-    --iphonex-safe-area-inset-left-portrait: env(safe-area-inset-left, 0px);
+@supports (padding: env(safe-area-inset-top)) {
+  @media (orientation: portrait) {
+    :root {
+      --iphonex-safe-area-inset-top-portrait: env(safe-area-inset-top);
+      --iphonex-safe-area-inset-right-portrait: env(safe-area-inset-right);
+      --iphonex-safe-area-inset-bottom-portrait: env(safe-area-inset-bottom);
+      --iphonex-safe-area-inset-left-portrait: env(safe-area-inset-left);
+    }
   }
-}
 
-@media (orientation: landscape) {
-  :root {
-    /* env() returns the exact value with fallback */
-    --iphonex-safe-area-inset-top-landscape: env(safe-area-inset-top, 0px);
-    --iphonex-safe-area-inset-right-landscape: env(safe-area-inset-right, 44px);
-    --iphonex-safe-area-inset-bottom-landscape: env(safe-area-inset-bottom, 21px);
-    --iphonex-safe-area-inset-left-landscape: env(safe-area-inset-left, 44px);
+  @media (orientation: landscape) {
+    :root {
+      --iphonex-safe-area-inset-top-landscape: env(safe-area-inset-top);
+      --iphonex-safe-area-inset-right-landscape: env(safe-area-inset-right);
+      --iphonex-safe-area-inset-bottom-landscape: env(safe-area-inset-bottom);
+      --iphonex-safe-area-inset-left-landscape: env(safe-area-inset-left);
+    }
   }
 }
