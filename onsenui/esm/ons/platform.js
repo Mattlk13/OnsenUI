@@ -152,6 +152,33 @@ class Platform {
   }
 
   /**
+   * @method getSafeAreaInsets
+   * @signature getSafeAreaInsets()
+   * @description
+   *   [en]Returns the safe area insets for the current device and orientation in pixels. Returns {top: 0, right: 0, bottom: 0, left: 0} if not applicable.[/en]
+   *   [ja]現在のデバイスと向きのセーフエリアのインセットをピクセル単位で返します。該当しない場合は {top: 0, right: 0, bottom: 0, left: 0} を返します。[/ja]
+   * @return {Object}
+   */
+  getSafeAreaInsets() {
+    if (!this.isIPhone()) {
+      return { top: 0, right: 0, bottom: 0, left: 0 };
+    }
+
+    const isPortrait = window.innerHeight > window.innerWidth;
+    const suffix = isPortrait ? 'portrait' : 'landscape';
+
+    const root = document.documentElement;
+    const computedStyle = getComputedStyle(root);
+
+    const top = parseInt(computedStyle.getPropertyValue(`--iphonex-safe-area-inset-top-${suffix}`), 10) || 0;
+    const right = parseInt(computedStyle.getPropertyValue(`--iphonex-safe-area-inset-right-${suffix}`), 10) || 0;
+    const bottom = parseInt(computedStyle.getPropertyValue(`--iphonex-safe-area-inset-bottom-${suffix}`), 10) || 0;
+    const left = parseInt(computedStyle.getPropertyValue(`--iphonex-safe-area-inset-left-${suffix}`), 10) || 0;
+
+    return { top, right, bottom, left };
+  }
+
+  /**
    * @method isIPad
    * @signature isIPad()
    * @description
